@@ -212,7 +212,42 @@ class InvoiceProcessor:
         else:
             return "unknown"
     
-    def process_pdf(self, pdf_path, output_path=None):
+    def send_to_asn_api(self, results):
+        """Send extracted data to ASN API endpoint"""
+        api_url = "https://asn.mazedemo.in/api/method/asn_web.purchaseinvoiceandpacking.split_and_create_docs"
+        headers = {
+            "Authorization": "Token d8b9d365596cfa3:05844281d60f0e0",
+            "Content-Type": "application/json"
+        }
+        
+        try:
+            # Filter out results with errors
+            valid_results = [result for result in results if 'error' not in result]
+            
+            # Make the API request
+            response = requests.post(api_url, headers=headers, json=valid_results)
+            
+            if response.status_code in [200, 201]:
+                print("Successfully sent data to ASN API")
+                return {
+                    "success": True,
+                    "response": response.json()
+                }
+            else:
+                print(f"Failed to send data to ASN API. Status code: {response.status_code}")
+                return {
+                    "success": False,
+                    "status_code": response.status_code,
+                    "details": response.text
+                }
+        except Exception as e:
+            print(f"Error sending data to ASN API: {str(e)}")
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def process_pdf(self, pdf_path, output_path=None, send_to_api=True):
         """Process PDF and extract information"""
         # Convert PDF to images
         images = self.pdf_to_images(pdf_path)
@@ -246,12 +281,19 @@ class InvoiceProcessor:
                 json.dump(results, f, indent=2, ensure_ascii=False)
             print(f"Results saved to {output_path}")
         
-        return results
+        # Send data to ASN API if requested
+        api_response = None
+        if send_to_api:
+            api_response = self.send_to_asn_api(results)
+            print("API Response:", json.dumps(api_response, indent=2))
+        
+        return results, api_response
 
 def main():
     parser = argparse.ArgumentParser(description='Process invoices and packing lists from PDF files.')
     parser.add_argument('pdf_path', help='Path to the PDF file')
     parser.add_argument('--output', '-o', help='Path to save the output JSON file')
+    parser.add_argument('--no-api', action='store_true', help='Skip sending data to ASN API')
     args = parser.parse_args()
     
     processor = InvoiceProcessor()
@@ -262,7 +304,8 @@ def main():
     else:
         output_path = args.output
     
-    results = processor.process_pdf(args.pdf_path, output_path)
+    # Process PDF and optionally send to API
+    results, api_response = processor.process_pdf(args.pdf_path, output_path, send_to_api=not args.no_api)
     
     # Print summary
     for i, result in enumerate(results):
@@ -270,6 +313,13 @@ def main():
             print(f"Page {i+1}: Error - {result['error']}")
         else:
             print(f"Page {i+1}: Successfully extracted {result['type']} data")
+    
+    # Print API response summary if data was sent to API
+    if not args.no_api:
+        if api_response and api_response.get('success'):
+            print("\nSuccessfully sent data to ASN API")
+        else:
+            print("\nFailed to send data to ASN API. See log for details.")
 
 if __name__ == "__main__":
     main()

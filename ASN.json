@@ -1,0 +1,55 @@
+{
+  "info": {
+    "name": "ASN",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "PI",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token d8b9d365596cfa3:05844281d60f0e0",
+            "disabled": false,
+            "type": "default"
+          }
+        ],
+        "auth": null,
+        "description": "",
+        "url": {
+          "raw": "https://asn.mazedemo.in/api/method/asn_web.purchaseinvoiceandpacking.split_and_create_docs",
+          "protocol": "https",
+          "host": [
+            "asn",
+            "mazedemo",
+            "in"
+          ],
+          "path": [
+            "api",
+            "method",
+            "asn_web.purchaseinvoiceandpacking.split_and_create_docs"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "  [\n  {\n    \"type\": \"invoice\",\n    \"data\": {\n      \"vendor_name\": \"RUSS TIGER ENTERPRISE CO., LTD.\",\n      \"address\": \"7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.\",\n      \"invoice_no\": \"BTPL-2402191\",\n      \"invoice_name\": \"TRANSMISSION PARTS\",\n      \"date\": \"2024/2/23\",\n      \"items\": [\n        {\n          \"order\": \"4172720\",\n          \"description\": \"193120001 SHAFT+OR\",\n          \"quantity\": \"160 PCS\",\n          \"unit_price\": \"6.00\",\n          \"amount\": \"960.00\"\n        },\n        {\n          \"order\": \"4163025\",\n          \"description\": \"610100758 SOLID INPUT SHAFT\",\n          \"quantity\": \"12 PCS\",\n          \"unit_price\": \"7.16\",\n          \"amount\": \"85.92\"\n        },\n        {\n          \"order\": \"4170144\",\n          \"description\": \"610100758 SOLID INPUT SHAFT\",\n          \"quantity\": \"36 PCS\",\n          \"unit_price\": \"7.16\",\n          \"amount\": \"257.76\"\n        },\n        {\n          \"order\": \"4172720\",\n          \"description\": \"610100758 SOLID INPUT SHAFT\",\n          \"quantity\": \"12 PCS\",\n          \"unit_price\": \"7.16\",\n          \"amount\": \"85.92\"\n        }\n      ],\n      \"total_quantity\": \"220 PCS\",\n      \"total_amount\": \"1,389.60\"\n    }\n  },\n  {\n    \"type\": \"packing_list\",\n    \"data\": {\n      \"vendor_name\": \"RUSS TIGER ENTERPRISE CO., LTD.\",\n      \"packing_list_no\": \"BTPL-2402191\",\n      \"packing_list_name\": \"TRANSMISSION PARTS\",\n      \"address\": \"Plot No. E-5/2, MIDC Talegaon - Phase II, Village–Badhalwadi Taluka - Mawal, Pune, Maharashtra-410507\",\n      \"shipping_date\": \"2024/3/2\",\n      \"total_net_weight\": \"124 KGS\",\n      \"total_gross_weight\": \"139 KGS\",\n      \"total_measurement\": \"0.23 CBM\",\n      \"final_item_name\": \"PALLET (=9CTN)\",\n      \"items\": [\n        {\n          \"no\": \"1\",\n          \"order\": \"4172720\",\n          \"description\": \"193120001 SHAFT+OR (40*4ctn)\",\n          \"quantity\": \"160 pcs\",\n          \"net_weight\": \"68 kgs\",\n          \"gross_weight\": \"139 kgs\",\n          \"measurement\": \"0.23\"\n        },\n        {\n          \"no\": \"\",\n          \"order\": \"4163025\",\n          \"description\": \"610100758 SOLID INPUT\",\n          \"quantity\": \"12 pcs\",\n          \"net_weight\": \"12 kgs\",\n          \"gross_weight\": \"\",\n          \"measurement\": \"\"\n        },\n        {\n          \"no\": \"\",\n          \"order\": \"4170144\",\n          \"description\": \"610100758 SOLID INPUT\",\n          \"quantity\": \"36 pcs\",\n          \"net_weight\": \"32 kgs\",\n          \"gross_weight\": \"\",\n          \"measurement\": \"\"\n        },\n        {\n          \"no\": \"\",\n          \"order\": \"4172720\",\n          \"description\": \"610100758 SOLID INPUT (12*5ctn)\",\n          \"quantity\": \"12 pcs\",\n          \"net_weight\": \"12 kgs\",\n          \"gross_weight\": \"\",\n          \"measurement\": \"\"\n        }\n      ]\n    }\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": []
+}
