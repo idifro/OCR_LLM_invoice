@@ -13,10 +13,17 @@ import dotenv
 dotenv.load_dotenv()
 
 # Azure OpenAI Configuration
-MODEL_BASE_URL = os.getenv("MODEL_BASE_URL", "https://mha2c-mabd2a4o-eastus2.cognitiveservices.azure.com/")
-API_VERSION = os.getenv("API_VERSION", "2024-12-01-preview")
-MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4.1")
-API_KEY = os.getenv("API_KEY", "dLbxCKdmrveV42xGDQQKOZ7PEnoXtjTASJET6JK1cdovLAk7WCvtJQQJ99BEACHYHv6XJ3w3AAAAACOG8UMJ")
+MODEL_BASE_URL = os.getenv("MODEL_BASE_URL")
+API_VERSION = os.getenv("API_VERSION")
+MODEL_NAME = os.getenv("MODEL_NAME")
+API_KEY = os.getenv("API_KEY")
+
+# ASN API Configuration
+ASN_API_URL = os.getenv("ASN_API_URL", "https://asn.mazedemo.in/api/method/asn_web.purchaseinvoiceandpacking.split_and_create_docs")
+ASN_API_TOKEN = os.getenv("ASN_API_TOKEN", "d8b9d365596cfa3:05844281d60f0e0")
+
+# Temp folder configuration
+TEMP_OUTPUT_FOLDER = os.getenv("TEMP_OUTPUT_FOLDER", tempfile.gettempdir())
 
 class InvoiceProcessor:
     def __init__(self):
@@ -34,7 +41,7 @@ class InvoiceProcessor:
                 images = convert_from_path(
                     pdf_path,
                     dpi=300,  # Higher DPI for better quality
-                    output_folder="C:/Users/Harshavardhan A/Downloads/MazeWorks/OCR App/",
+                    output_folder=TEMP_OUTPUT_FOLDER,
                     fmt="png",
                     use_pdftocairo=True,
                     single_file=False
@@ -214,9 +221,9 @@ class InvoiceProcessor:
     
     def send_to_asn_api(self, results):
         """Send extracted data to ASN API endpoint"""
-        api_url = "https://asn.mazedemo.in/api/method/asn_web.purchaseinvoiceandpacking.split_and_create_docs"
+        api_url = ASN_API_URL
         headers = {
-            "Authorization": "Token d8b9d365596cfa3:05844281d60f0e0",
+            "Authorization": f"Token {ASN_API_TOKEN}",
             "Content-Type": "application/json"
         }
         
