@@ -1,0 +1,144 @@
+[
+  {
+    "type": "multipage_invoice",
+    "page_count": 3,
+    "vendor_name": "FLT Italia s.r.l.",
+    "vendor_address": "via Cavolto, 18, 22040 Anzano del Parco (CO), Italy",
+    "delivery_address": "BONFIGLIOLI TRANSMISSION (PVT) LTD., Plot E- 5/2, MIDC Talegaon Phase II Pune, 00000 PUNE, INDIA",
+    "invoice_no": "35701",
+    "date": "20/03/2024",
+    "items": [
+      {
+        "code": "6201/02B 712750071",
+        "description": "Ordine Cl. num. 123800/2023 del 30/11/2023 Vs. num. 4152631 del 27/11/2023 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "360,00",
+        "unit_price": "0,340000",
+        "discount": "0",
+        "net_price": "122,40"
+      },
+      {
+        "code": "6011/02B 712750049",
+        "description": "Ordine Cl. num. 125900/2023 del 07/12/2023 Vs. num. 4155717 del 05/12/2023 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "576,00",
+        "unit_price": "1,940000",
+        "discount": "0",
+        "net_price": "1.117,44"
+      },
+      {
+        "code": "6205/02B 712750076",
+        "description": "Ordine Cl. num. 129900/2023 del 15/12/2023 Vs. num. 4157864 del 13/12/2023 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "9.450,00",
+        "unit_price": "0,650000",
+        "discount": "0",
+        "net_price": "6.142,50"
+      },
+      {
+        "code": "6008/02B 712750186",
+        "description": "BEARINGS - 56 pcs/box, Custom Tariff 84821090",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "2.352,00",
+        "unit_price": "0,940000",
+        "discount": "0",
+        "net_price": "2.210,88"
+      },
+      {
+        "code": "6204-2RSE/02B 712751044",
+        "description": "BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "1.071,00",
+        "unit_price": "0,660000",
+        "discount": "0",
+        "net_price": "706,86"
+      },
+      {
+        "code": "6205/02B 712750076",
+        "description": "Ordine Cl. num. 132500/2023 del 21/12/2023 Vs. num. 4161146 del 19/12/2023 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "4.200,00",
+        "unit_price": "0,650000",
+        "discount": "0",
+        "net_price": "2.730,00"
+      },
+      {
+        "code": "6204-2RSE/02B 712751044",
+        "description": "Ordine Cl. num. 1600/2024 del 09/01/2024 Vs. num. 4156299 del 08/01/2024 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "1.428,00",
+        "unit_price": "0,660000",
+        "discount": "0",
+        "net_price": "942,48"
+      },
+      {
+        "code": "6206/02B 712750078",
+        "description": "BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "1.134,00",
+        "unit_price": "0,830000",
+        "discount": "0",
+        "net_price": "941,22"
+      },
+      {
+        "code": "6205/02B 712750076",
+        "description": "BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "7.560,00",
+        "unit_price": "0,650000",
+        "discount": "0",
+        "net_price": "4.914,00"
+      },
+      {
+        "code": "6006/02B 712750044",
+        "description": "BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "910,00",
+        "unit_price": "0,740000",
+        "discount": "0",
+        "net_price": "673,40"
+      },
+      {
+        "code": "6206/02B 712750078",
+        "description": "Ordine Cl. num. 6600/2024 del 19/01/2024 Vs. num. 4171038 del 19/01/2024 BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "2.898,00",
+        "unit_price": "0,830000",
+        "discount": "0",
+        "net_price": "2.405,34"
+      },
+      {
+        "code": "6006/02B 712750044",
+        "description": "BEARINGS",
+        "intrastat_number": "84821090",
+        "pcs": "N.",
+        "quantity": "182,00",
+        "unit_price": "0,740000",
+        "discount": "0",
+        "net_price": "134,68"
+      }
+    ],
+    "totals": {
+      "total_amount": "27,496.02",
+      "vat": "ABB / NON IMPONIB. ART. 8A ESP.",
+      "vat_amount": "0.00",
+      "discount": "0.00",
+      "net_price": "27,496.02"
+    },
+    "processing_info": {
+      "has_incomplete_item": false,
+      "incomplete_description": ""
+    }
+  }
+]
