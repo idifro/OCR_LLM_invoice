@@ -8,6 +8,8 @@ import argparse
 from pdf2image import convert_from_path
 import tempfile
 import dotenv
+import re
+from prompts import *  # Import all prompts from prompts.py
 
 # Load environment variables from .env file if it exists
 dotenv.load_dotenv()
@@ -67,19 +69,19 @@ class InvoiceProcessor:
         # Convert image to base64
         base64_image = self.encode_image(image)
         
-        # Create payload for the API request
+        # Create payload for the API request using prompts from prompts.py
         payload = {
             "messages": [
                 {
                     "role": "system", 
-                    "content": "You are an AI specialized in extracting structured information from invoice images. Extract information in a structured JSON format without any explanations."
+                    "content": INVOICE_HEADER_SYSTEM_PROMPT
                 },
                 {
                     "role": "user",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Extract the following information from this invoice image and return it in a valid JSON format:\n\n1. Vendor Name\n2. Address\n3. Invoice No.\n4. Invoice Name\n5. Date\n6. Table containing Order, Description, Quantity, Unit Price, Amount\n7. Total Quantity\n8. Total Amount\n\nThe JSON should have keys: vendor_name, address, invoice_no, invoice_name, date, total_quantity, total_amount, and items (an array of objects with order, description, quantity, unit_price, amount)."
+                            "text": INVOICE_HEADER_USER_PROMPT
                         },
                         {
                             "type": "image_url",
@@ -125,19 +127,19 @@ class InvoiceProcessor:
         # Convert image to base64
         base64_image = self.encode_image(image)
         
-        # Create payload for the API request
+        # Create payload for the API request using prompts from prompts.py
         payload = {
             "messages": [
                 {
                     "role": "system", 
-                    "content": "You are an AI specialized in extracting structured information from packing list images. Extract information in a structured JSON format without any explanations."
+                    "content": PACKING_LIST_SYSTEM_PROMPT
                 },
                 {
                     "role": "user",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Extract the following information from this packing list image and return it in a valid JSON format:\n\n1. Vendor Name\n2. Packing List No.\n3. Packet List Name\n4. Address\n5. Shipping Date\n6. Table containing No., Order, Description, Quantity, Net Weight, Gross Weight, Measurement\n7. Total Net Weight\n8. Total Gross Weight\n9. Total Measurement\n10. Final Item name\nThe JSON should have keys: vendor_name, packing_list_no, packing_list_name, address, shipping_date, total_net_weight, total_gross_weight, total_measurement, final_item_name, and items (an array of objects with no, order, description, quantity, net_weight, gross_weight, measurement)."
+                            "text": PACKING_LIST_USER_PROMPT
                         },
                         {
                             "type": "image_url",
@@ -179,19 +181,19 @@ class InvoiceProcessor:
         # Convert image to base64
         base64_image = self.encode_image(image)
         
-        # Create payload for the API request
+        # Create payload for the API request using prompts from prompts.py
         payload = {
             "messages": [
                 {
                     "role": "system", 
-                    "content": "You are an AI specialized in document classification."
+                    "content": DOCUMENT_TYPE_SYSTEM_PROMPT
                 },
                 {
                     "role": "user",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Determine if this document is an invoice or a packing list. Return only one word: either 'invoice' or 'packing_list'."
+                            "text": DOCUMENT_TYPE_USER_PROMPT
                         },
                         {
                             "type": "image_url",
@@ -203,7 +205,7 @@ class InvoiceProcessor:
                 }
             ],
             "model": self.model_name,
-            "max_tokens": 50
+            "max_tokens": 50  # Small limit as we only need a short response
         }
         
         # Make the API request
@@ -279,6 +281,13 @@ class InvoiceProcessor:
                 "vat_amount": "",
                 "discount": "",
                 "net_price": ""
+            },
+            "shipping_details": {
+                "shipment_by": "",
+                "delivery_terms": "",
+                "packages": "",
+                "net_weight": "",
+                "gross_weight": ""
             },
             "processing_info": {
                 "has_incomplete_item": False,
@@ -356,14 +365,14 @@ class InvoiceProcessor:
                 "messages": [
                     {
                         "role": "system", 
-                        "content": "You are an AI specialized in extracting structured information from complex invoice tables with multiline items. You must ALWAYS return a valid, parseable JSON object without any additional text, explanation or markdown formatting."
+                        "content": INVOICE_TABLE_SYSTEM_PROMPT
                     },
                     {
                         "role": "user",
                         "content": [
                             {
                                 "type": "text",
-                                "text": f"Extract the table items from this invoice image (page {i+1} of {page_count}) and return ONLY a valid JSON object without any additional text.\n\nIMPORTANT NOTES ABOUT THE TABLE STRUCTURE AND DESCRIPTION FIELD:\n1. Each line item has TWO codes: an alphanumeric code AND a numeric code. Capture both in the 'code' field separated by a space or comma.\n\n2. DESCRIPTION FIELD PARSING RULES (CRITICAL):\n   - Description typically starts with text and ends with 'INTRASTAT' followed by a number\n   - If a line starts with 'INTRASTAT' followed by a number, it belongs to the PREVIOUS line item\n   - The INTRASTAT number serves as an end-of-line delimiter for descriptions\n   - If the last item on the page has no INTRASTAT number, it means the description continues on the next page\n   - Split each description into two separate fields: 'description' (the main text) and 'intrastat_number' (just the number)\n\n3. For each row in the table extract:\n   - Code (include both alphanumeric and numeric codes)\n   - Description (all text EXCEPT the INTRASTAT part)\n   - Intrastat_number (just the number following 'INTRASTAT')\n   - PCS (pieces)\n   - Quantity\n   - Unit Price\n   - Discount\n   - Net Price EURO\n\n4. Also extract any information about page continuity (e.g., 'continued on next page').\n\nReturn ONLY a JSON object with EXACTLY this structure:\n{{\n  \"items\": [\n    {{\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"intrastat_number\": \"string\",\n      \"pcs\": \"string\",\n      \"quantity\": \"string\",\n      \"unit_price\": \"string\",\n      \"discount\": \"string\",\n      \"net_price\": \"string\"\n    }}\n  ],\n  \"has_more_pages\": boolean,\n  \"has_incomplete_item\": boolean\n}}\n\nIf the last item has an incomplete description (missing INTRASTAT), set has_incomplete_item to true.\n\nEnsure your JSON is valid and can be parsed by standard JSON parsers."
+                                "text": INVOICE_TABLE_USER_PROMPT.format(page_num=i+1, total_pages=page_count)
                             },
                             {
                                 "type": "image_url",
@@ -506,14 +515,14 @@ class InvoiceProcessor:
                     "messages": [
                         {
                             "role": "system", 
-                            "content": "You are an AI specialized in extracting structured information from invoice totals. Extract information in a structured JSON format without any explanations."
+                            "content": INVOICE_TOTALS_SYSTEM_PROMPT
                         },
                         {
                             "role": "user",
                             "content": [
                                 {
                                     "type": "text",
-                                    "text": "Extract the following total information from this final invoice page and return it in a valid JSON format:\n\n1. Total Amount\n2. VAT Rate\n3. VAT Amount\n4. Discount\n5. Net Price\n\nThe JSON should have keys: total_amount, vat, vat_amount, discount, net_price."
+                                    "text": INVOICE_TOTALS_USER_PROMPT
                                 },
                                 {
                                     "type": "image_url",
@@ -536,18 +545,51 @@ class InvoiceProcessor:
                     try:
                         # Extract the content
                         content = result['choices'][0]['message']['content']
+                        print(f"\nRaw JSON content for totals and shipping:\n{content}\n")
+                        
+                        # Clean up content for JSON parsing
+                        content = content.strip()
+                        if content.startswith('```json'):
+                            content = content[7:]
+                        if content.startswith('```'):
+                            content = content[3:]
+                        if content.endswith('```'):
+                            content = content[:-3]
+                        content = content.strip()
+                        
                         # Parse the JSON
                         totals_data = json.loads(content)
                         
                         # Update combined result with totals
-                        combined_result["totals"]["total_amount"] = totals_data.get("total_amount", "")
-                        combined_result["totals"]["vat"] = totals_data.get("vat", "")
-                        combined_result["totals"]["vat_amount"] = totals_data.get("vat_amount", "")
-                        combined_result["totals"]["discount"] = totals_data.get("discount", "")
-                        combined_result["totals"]["net_price"] = totals_data.get("net_price", "")
+                        if "totals" in totals_data:
+                            print("Processing financial totals...")
+                            combined_result["totals"]["total_amount"] = totals_data["totals"].get("total_amount", "")
+                            combined_result["totals"]["vat"] = totals_data["totals"].get("vat", "")
+                            combined_result["totals"]["vat_amount"] = totals_data["totals"].get("vat_amount", "")
+                            combined_result["totals"]["discount"] = totals_data["totals"].get("discount", "")
+                            combined_result["totals"]["net_price"] = totals_data["totals"].get("net_price", "")
+                        else:
+                            # Legacy format without nested structure
+                            combined_result["totals"]["total_amount"] = totals_data.get("total_amount", "")
+                            combined_result["totals"]["vat"] = totals_data.get("vat", "")
+                            combined_result["totals"]["vat_amount"] = totals_data.get("vat_amount", "")
+                            combined_result["totals"]["discount"] = totals_data.get("discount", "")
+                            combined_result["totals"]["net_price"] = totals_data.get("net_price", "")
                         
+                        # Update combined result with shipping details
+                        if "shipping_details" in totals_data:
+                            print("Processing shipping details...")
+                            combined_result["shipping_details"]["shipment_by"] = totals_data["shipping_details"].get("shipment_by", "")
+                            combined_result["shipping_details"]["delivery_terms"] = totals_data["shipping_details"].get("delivery_terms", "")
+                            combined_result["shipping_details"]["packages"] = totals_data["shipping_details"].get("packages", "")
+                            combined_result["shipping_details"]["net_weight"] = totals_data["shipping_details"].get("net_weight", "")
+                            combined_result["shipping_details"]["gross_weight"] = totals_data["shipping_details"].get("gross_weight", "")
+                        
+                    except json.JSONDecodeError as json_err:
+                        print(f"JSON parsing error for totals: {json_err}")
+                        print(f"Problematic content: {content[:100]}...")
                     except Exception as e:
-                        print(f"Error parsing totals: {e}")
+                        print(f"Error parsing totals and shipping details: {e}")
                 else:
                     print(f"API request failed for totals: {totals_response.status_code}")
                     

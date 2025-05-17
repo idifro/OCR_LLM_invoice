@@ -1,91 +1,52 @@
 {
-  "success": true,
-  "message": "PDF processed and data sent to ASN API successfully",
+  "success": false,
+  "message": "Failed to send data to ASN API:  {\"exception\":\"frappe.exceptions.DuplicateEntryError: ('Packing List', 'BTPL-240219', IntegrityError(1062, \\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\"))\",\"exc_type\":\"DuplicateEntryError\",\"_exc_source\":\"asn_web (app)\",\"exc\":\"[\\\"Traceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/model/base_document.py\\\\\\\", line 576, in db_insert\\\\n    frappe.db.sql(\\\\n  File \\\\\\\"apps/frappe/frappe/database/database.py\\\\\\\", line 230, in sql\\\\n    self._cursor.execute(query, values)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 153, in execute\\\\n    result = self._query(query)\\\\n             ^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 322, in _query\\\\n    conn.query(q)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 563, in query\\\\n    self._affected_rows = self._read_query_result(unbuffered=unbuffered)\\\\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 825, in _read_query_result\\\\n    result.read()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 1199, in read\\\\n    first_packet = self.connection._read_packet()\\\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 775, in _read_packet\\\\n    packet.raise_for_error()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/protocol.py\\\\\\\", line 219, in raise_for_error\\\\n    err.raise_mysql_exception(self._data)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/err.py\\\\\\\", line 150, in raise_mysql_exception\\\\n    raise errorclass(errno, errval)\\\\npymysql.err.IntegrityError: (1062, \\\\\\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\\\\\")\\\\n\\\\nDuring handling of the above exception, another exception occurred:\\\\n\\\\nTraceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/app.py\\\\\\\", line 115, in application\\\\n    response = frappe.api.handle(request)\\\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/__init__.py\\\\\\\", line 49, in handle\\\\n    data = endpoint(**arguments)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/v1.py\\\\\\\", line 36, in handle_rpc_call\\\\n    return frappe.handler.handle()\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 51, in handle\\\\n    data = execute_cmd(cmd)\\\\n           ^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 84, in execute_cmd\\\\n    return frappe.call(method, **frappe.form_dict)\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 1736, in call\\\\n    return fn(*args, **newargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/utils/typing_validations.py\\\\\\\", line 31, in wrapper\\\\n    return func(*args, **kwargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/asn_web/asn_web/purchaseinvoiceandpacking.py\\\\\\\", line 79, in split_and_create_docs\\\\n    new_doc.insert(ignore_permissions=True)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 320, in insert\\\\n    self.db_insert(ignore_if_duplicate=ignore_if_duplicate)\\\\n  File \\\\\\\"apps/frappe/frappe/model/base_document.py\\\\\\\", line 603, in db_insert\\\\n    raise frappe.DuplicateEntryError(self.doctype, self.name, e)\\\\nfrappe.exceptions.DuplicateEntryError: ('Packing List', 'BTPL-240219', IntegrityError(1062, \\\\\\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\\\\\"))\\\\n\\\"]\",\"_server_messages\":\"[\\\"{\\\\\\\"message\\\\\\\": \\\\\\\"Packing List <strong>BTPL-240219</strong> already exists\\\\\\\", \\\\\\\"title\\\\\\\": \\\\\\\"Duplicate Name\\\\\\\", \\\\\\\"indicator\\\\\\\": \\\\\\\"red\\\\\\\"}\\\"]\"}",
   "filename": "BTPL_240219_invoice_and_packing_list.pdf",
   "extracted_data": [
     {
-      "type": "invoice",
-      "data": {
-        "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
-        "address": "7FL-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.",
-        "invoice_no": "BTPL-240219",
-        "invoice_name": "TRANSMISSION PARTS",
-        "date": "2024/2/23",
-        "items": [
-          {
-            "order": "4172720",
-            "description": "193120001 SHAFT+OR",
-            "quantity": 160,
-            "unit_price": "US$6.00",
-            "amount": "US$960.00"
-          },
-          {
-            "order": "4163025",
-            "description": "610100758 SOLID INPUT SHAFT",
-            "quantity": 12,
-            "unit_price": "US$7.16",
-            "amount": "US$85.92"
-          },
-          {
-            "order": "4170144",
-            "description": "610100758 SOLID INPUT SHAFT",
-            "quantity": 36,
-            "unit_price": "US$7.16",
-            "amount": "US$257.76"
-          },
-          {
-            "order": "4172720",
-            "description": "610100758 SOLID INPUT SHAFT",
-            "quantity": 12,
-            "unit_price": "US$7.16",
-            "amount": "US$85.92"
-          }
-        ],
-        "total_quantity": 220,
-        "total_amount": "US$1,389.60"
-      }
+      "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
+      "vendor_address": "7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.",
+      "delivery_address": "Plot No. E-5/2, MIDC Talegaon - Phase II, Village–Badhalwadi Taluka - Mawal, Pune, Maharashtra - 410507",
+      "invoice_no": "BTPL-240219",
+      "date": "2024/2/23",
+      "type": "invoice"
     },
     {
       "type": "packing_list",
       "data": {
         "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
+        "address": "7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.\nhttp://www.russtiger.com/\ne-mail: russ0613@ms7.hinet.net\nTEL: 886-4-24759008  FAX: 886-4-24722007",
         "packing_list_no": "BTPL-240219",
-        "packing_list_name": "TRANSMISSION PARTS",
-        "address": "Plot No. E-5/2, MIDC Talegaon - Phase II, Village–Badhaiwadi Taluka - Mawal Pune, Maharashtra - 410507",
-        "shipping_date": "2024/3/2",
+        "date": "2024/2/23",
         "items": [
           {
-            "no": 1,
-            "order": "4172720",
-            "description": "193120001 SHAFT+OR",
-            "quantity": "160 pcs",
+            "item_no": "1",
+            "description": "SHAFT+OR",
+            "quantity": "160 pcs (40*4ctn)",
             "net_weight": "68 kgs",
             "gross_weight": "139 kgs",
             "measurement": "0.23"
           },
           {
-            "no": "",
-            "order": "4163025",
-            "description": "610100758 SOLID INPUT",
+            "item_no": "",
+            "description": "SOLID INPUT",
             "quantity": "12 pcs",
             "net_weight": "12 kgs",
             "gross_weight": "",
             "measurement": ""
           },
           {
-            "no": "",
-            "order": "4170144",
-            "description": "610100758 SOLID INPUT",
+            "item_no": "",
+            "description": "SOLID INPUT",
             "quantity": "36 pcs",
             "net_weight": "32 kgs",
             "gross_weight": "",
             "measurement": ""
           },
           {
-            "no": "",
-            "order": "4172720",
-            "description": "610100758 SOLID INPUT",
-            "quantity": "12 pcs",
+            "item_no": "",
+            "description": "SOLID INPUT",
+            "quantity": "12 pcs (12*5ctn)",
             "net_weight": "12 kgs",
             "gross_weight": "",
             "measurement": ""
@@ -94,20 +55,8 @@
         "total_net_weight": "124 KGS",
         "total_gross_weight": "139 KGS",
         "total_measurement": "0.23 CBM",
-        "final_item_name": "PALLET (=9CTN)"
+        "notes": "E. & O. E."
       }
     }
-  ],
-  "api_response": {
-    "success": true,
-    "response": {
-      "message": {
-        "message": "Documents created",
-        "created": [
-          "BTPL-240219",
-          "BTPL-240219"
-        ]
-      }
-    }
-  }
+  ]
 }
