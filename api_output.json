@@ -1,61 +1,157 @@
 {
   "success": false,
-  "message": "Failed to send data to ASN API:  {\"exception\":\"frappe.exceptions.DuplicateEntryError: ('Packing List', 'BTPL-240219', IntegrityError(1062, \\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\"))\",\"exc_type\":\"DuplicateEntryError\",\"_exc_source\":\"asn_web (app)\",\"exc\":\"[\\\"Traceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/model/base_document.py\\\\\\\", line 576, in db_insert\\\\n    frappe.db.sql(\\\\n  File \\\\\\\"apps/frappe/frappe/database/database.py\\\\\\\", line 230, in sql\\\\n    self._cursor.execute(query, values)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 153, in execute\\\\n    result = self._query(query)\\\\n             ^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 322, in _query\\\\n    conn.query(q)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 563, in query\\\\n    self._affected_rows = self._read_query_result(unbuffered=unbuffered)\\\\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 825, in _read_query_result\\\\n    result.read()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 1199, in read\\\\n    first_packet = self.connection._read_packet()\\\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 775, in _read_packet\\\\n    packet.raise_for_error()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/protocol.py\\\\\\\", line 219, in raise_for_error\\\\n    err.raise_mysql_exception(self._data)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/err.py\\\\\\\", line 150, in raise_mysql_exception\\\\n    raise errorclass(errno, errval)\\\\npymysql.err.IntegrityError: (1062, \\\\\\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\\\\\")\\\\n\\\\nDuring handling of the above exception, another exception occurred:\\\\n\\\\nTraceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/app.py\\\\\\\", line 115, in application\\\\n    response = frappe.api.handle(request)\\\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/__init__.py\\\\\\\", line 49, in handle\\\\n    data = endpoint(**arguments)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/v1.py\\\\\\\", line 36, in handle_rpc_call\\\\n    return frappe.handler.handle()\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 51, in handle\\\\n    data = execute_cmd(cmd)\\\\n           ^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 84, in execute_cmd\\\\n    return frappe.call(method, **frappe.form_dict)\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 1736, in call\\\\n    return fn(*args, **newargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/utils/typing_validations.py\\\\\\\", line 31, in wrapper\\\\n    return func(*args, **kwargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/asn_web/asn_web/purchaseinvoiceandpacking.py\\\\\\\", line 79, in split_and_create_docs\\\\n    new_doc.insert(ignore_permissions=True)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 320, in insert\\\\n    self.db_insert(ignore_if_duplicate=ignore_if_duplicate)\\\\n  File \\\\\\\"apps/frappe/frappe/model/base_document.py\\\\\\\", line 603, in db_insert\\\\n    raise frappe.DuplicateEntryError(self.doctype, self.name, e)\\\\nfrappe.exceptions.DuplicateEntryError: ('Packing List', 'BTPL-240219', IntegrityError(1062, \\\\\\\"Duplicate entry 'BTPL-240219' for key 'PRIMARY'\\\\\\\"))\\\\n\\\"]\",\"_server_messages\":\"[\\\"{\\\\\\\"message\\\\\\\": \\\\\\\"Packing List <strong>BTPL-240219</strong> already exists\\\\\\\", \\\\\\\"title\\\\\\\": \\\\\\\"Duplicate Name\\\\\\\", \\\\\\\"indicator\\\\\\\": \\\\\\\"red\\\\\\\"}\\\"]\"}",
-  "filename": "BTPL_240219_invoice_and_packing_list.pdf",
+  "message": "Failed to send data to ASN API:  {\"exception\":\"pymysql.err.OperationalError: (1292, \\\"Incorrect date value: '20-03-2024' for column `_12029b94682f3e93`.`tabPurchase Invoice`.`date` at row 1\\\")\",\"exc_type\":\"OperationalError\",\"_exc_source\":\"asn_web (app)\",\"exc\":\"[\\\"Traceback (most recent call last):\\\\n  File \\\\\\\"apps/frappe/frappe/app.py\\\\\\\", line 115, in application\\\\n    response = frappe.api.handle(request)\\\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/__init__.py\\\\\\\", line 49, in handle\\\\n    data = endpoint(**arguments)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/api/v1.py\\\\\\\", line 36, in handle_rpc_call\\\\n    return frappe.handler.handle()\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 51, in handle\\\\n    data = execute_cmd(cmd)\\\\n           ^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/handler.py\\\\\\\", line 84, in execute_cmd\\\\n    return frappe.call(method, **frappe.form_dict)\\\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/__init__.py\\\\\\\", line 1736, in call\\\\n    return fn(*args, **newargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/frappe/frappe/utils/typing_validations.py\\\\\\\", line 31, in wrapper\\\\n    return func(*args, **kwargs)\\\\n           ^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"apps/asn_web/asn_web/purchaseinvoiceandpacking.py\\\\\\\", line 79, in split_and_create_docs\\\\n    new_doc.insert(ignore_permissions=True)\\\\n  File \\\\\\\"apps/frappe/frappe/model/document.py\\\\\\\", line 320, in insert\\\\n    self.db_insert(ignore_if_duplicate=ignore_if_duplicate)\\\\n  File \\\\\\\"apps/frappe/frappe/model/base_document.py\\\\\\\", line 576, in db_insert\\\\n    frappe.db.sql(\\\\n  File \\\\\\\"apps/frappe/frappe/database/database.py\\\\\\\", line 230, in sql\\\\n    self._cursor.execute(query, values)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 153, in execute\\\\n    result = self._query(query)\\\\n             ^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/cursors.py\\\\\\\", line 322, in _query\\\\n    conn.query(q)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 563, in query\\\\n    self._affected_rows = self._read_query_result(unbuffered=unbuffered)\\\\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 825, in _read_query_result\\\\n    result.read()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 1199, in read\\\\n    first_packet = self.connection._read_packet()\\\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/connections.py\\\\\\\", line 775, in _read_packet\\\\n    packet.raise_for_error()\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/protocol.py\\\\\\\", line 219, in raise_for_error\\\\n    err.raise_mysql_exception(self._data)\\\\n  File \\\\\\\"env/lib/python3.12/site-packages/pymysql/err.py\\\\\\\", line 150, in raise_mysql_exception\\\\n    raise errorclass(errno, errval)\\\\npymysql.err.OperationalError: (1292, \\\\\\\"Incorrect date value: '20-03-2024' for column `_12029b94682f3e93`.`tabPurchase Invoice`.`date` at row 1\\\\\\\")\\\\n\\\"]\"}",
+  "filename": "Invoice_357_20_03_2024.pdf",
   "extracted_data": [
     {
-      "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
-      "vendor_address": "7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.",
-      "delivery_address": "Plot No. E-5/2, MIDC Talegaon - Phase II, Village–Badhalwadi Taluka - Mawal, Pune, Maharashtra - 410507",
-      "invoice_no": "BTPL-240219",
-      "date": "2024/2/23",
-      "type": "invoice"
-    },
-    {
-      "type": "packing_list",
+      "type": "multipage_invoice",
       "data": {
-        "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
-        "address": "7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.\nhttp://www.russtiger.com/\ne-mail: russ0613@ms7.hinet.net\nTEL: 886-4-24759008  FAX: 886-4-24722007",
-        "packing_list_no": "BTPL-240219",
-        "date": "2024/2/23",
+        "page_count": 3,
+        "vendor_name": "FLT Italia s.r.l.",
+        "vendor_address": "via Cavolto, 18, 22040 Anzano del Parco (CO), Italy",
+        "delivery_address": "BONFIGLIOLI TRANSMISSION (PVT) LTD.\nPlot E- 5/2, MIDC Talegaon Phase II Pune\n00000 PUNE\nINDIA",
+        "invoice_no": "35701",
+        "date": "20/03/2024",
         "items": [
           {
-            "item_no": "1",
-            "description": "SHAFT+OR",
-            "quantity": "160 pcs (40*4ctn)",
-            "net_weight": "68 kgs",
-            "gross_weight": "139 kgs",
-            "measurement": "0.23"
+            "code": "6201/02B 712750071",
+            "description": "Ordine Cl. num. 123800/2023 del 30/11/2023 Vs. num. 4152631 del 27/11/2023 BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "360,00",
+            "unit_price": "0,340000",
+            "discount": "0",
+            "net_price": "122,40"
           },
           {
-            "item_no": "",
-            "description": "SOLID INPUT",
-            "quantity": "12 pcs",
-            "net_weight": "12 kgs",
-            "gross_weight": "",
-            "measurement": ""
+            "code": "6011/02B 712750049",
+            "description": "Ordine Cl. num. 125900/2023 del 07/12/2023 Vs. num. 4155717 del 05/12/2023 BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "576,00",
+            "unit_price": "1,940000",
+            "discount": "0",
+            "net_price": "1.117,44"
           },
           {
-            "item_no": "",
-            "description": "SOLID INPUT",
-            "quantity": "36 pcs",
-            "net_weight": "32 kgs",
-            "gross_weight": "",
-            "measurement": ""
+            "code": "6205/02B 712750076",
+            "description": "Ordine Cl. num. 129900/2023 del 15/12/2023 Vs. num. 4157864 del 13/12/2023 BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "9.450,00",
+            "unit_price": "0,650000",
+            "discount": "0",
+            "net_price": "6.142,50"
           },
           {
-            "item_no": "",
-            "description": "SOLID INPUT",
-            "quantity": "12 pcs (12*5ctn)",
-            "net_weight": "12 kgs",
-            "gross_weight": "",
-            "measurement": ""
+            "code": "6008/02B 712750186",
+            "description": "BEARINGS - 56 pcs/box, Custom Tariff 84821090",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "2.352,00",
+            "unit_price": "0,940000",
+            "discount": "0",
+            "net_price": "2.210,88"
+          },
+          {
+            "code": "6204-2RSE/02B 712751044",
+            "description": "BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "1.071,00",
+            "unit_price": "0,660000",
+            "discount": "0",
+            "net_price": "706,86"
+          },
+          {
+            "code": "6205/02B 712750076",
+            "description": "Ordine Cl. num. 132500/2023 del 21/12/2023 Vs. num. 4161146 del 19/12/2023 BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "4.200,00",
+            "unit_price": "0,650000",
+            "discount": "0",
+            "net_price": "2.730,00"
+          },
+          {
+            "code": "6204-2RSE/02B 712751044",
+            "description": "BEARINGS Ordine Cl. num. 1600/2024 del 09/01/2024 Vs. num. 4165299 del 08/01/2024",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "1.428,00",
+            "unit_price": "0,660000",
+            "discount": "0",
+            "net_price": "942,48"
+          },
+          {
+            "code": "6206/02B 712750078",
+            "description": "BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "1.134,00",
+            "unit_price": "0,830000",
+            "discount": "0",
+            "net_price": "941,22"
+          },
+          {
+            "code": "6205/02B 712750076",
+            "description": "BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "7.560,00",
+            "unit_price": "0,650000",
+            "discount": "0",
+            "net_price": "4.914,00"
+          },
+          {
+            "code": "6006/02B 712750044",
+            "description": "BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "910,00",
+            "unit_price": "0,740000",
+            "discount": "0",
+            "net_price": "673,40"
+          },
+          {
+            "code": "6206/02B 712750078",
+            "description": "BEARINGS Ordine Cl. num. 6600/2024 del 19/01/2024 Vs. num. 4171038 del 19/01/2024",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "2.898,00",
+            "unit_price": "0,830000",
+            "discount": "0",
+            "net_price": "2.405,34"
+          },
+          {
+            "code": "6006/02B 712750044",
+            "description": "BEARINGS",
+            "intrastat_number": "84821090",
+            "pcs": "N.",
+            "quantity": "182,00",
+            "unit_price": "0,740000",
+            "discount": "0",
+            "net_price": "134,68"
           }
         ],
-        "total_net_weight": "124 KGS",
-        "total_gross_weight": "139 KGS",
-        "total_measurement": "0.23 CBM",
-        "notes": "E. & O. E."
+        "totals": {
+          "total_amount": "27,496.02",
+          "vat": "ABB",
+          "vat_amount": "NON IMPONIB. ART. 8A ESP.",
+          "discount": "0,00",
+          "net_price": "27,496.02"
+        },
+        "shipping_details": {
+          "shipment_by": "A MEZZO VETTORE",
+          "delivery_terms": "FOB",
+          "packages": "10",
+          "net_weight": "7,410.00",
+          "gross_weight": "7,707.00"
+        },
+        "processing_info": {
+          "has_incomplete_item": false,
+          "incomplete_description": ""
+        }
       }
     }
   ]

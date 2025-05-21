@@ -17,6 +17,23 @@ Respond with ONLY ONE of the following:
 - "packing_list" if the document is a packing list
 - "unknown" if you cannot determine the document type"""
 
+# Mixed Type Invoice Header Extraction Prompts
+INVOICE_MIXED_HEADER_SYSTEM_PROMPT = """You are an AI specialized in extracting structured information from invoice images. 
+Extract information in a structured JSON format without any explanations."""
+
+INVOICE_MIXED_HEADER_USER_PROMPT = """Extract the following information from this invoice image and return it in a valid JSON format:
+
+1. Vendor Name
+2. Address
+3. Invoice No.
+4. Invoice Name
+5. Date
+6. Table containing Order, Description, Quantity, Unit Price, Amount
+7. Total Quantity
+8. Total Amount
+
+The JSON should have keys: vendor_name, address, invoice_no, invoice_name, date, total_quantity, total_amount, and items (an array of objects with order, description, quantity, unit_price, amount)."""
+
 # Invoice header extraction prompts
 INVOICE_HEADER_SYSTEM_PROMPT = """You are an AI specialized in extracting structured information from invoice images. 
 Extract information in a structured JSON format without any explanations."""

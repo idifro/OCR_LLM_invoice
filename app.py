@@ -74,14 +74,14 @@ class InvoiceProcessor:
             "messages": [
                 {
                     "role": "system", 
-                    "content": INVOICE_HEADER_SYSTEM_PROMPT
+                    "content": INVOICE_MIXED_HEADER_SYSTEM_PROMPT
                 },
                 {
                     "role": "user",
                     "content": [
                         {
                             "type": "text",
-                            "text": INVOICE_HEADER_USER_PROMPT
+                            "text": INVOICE_MIXED_HEADER_USER_PROMPT
                         },
                         {
                             "type": "image_url",
@@ -108,8 +108,7 @@ class InvoiceProcessor:
                 # Parse the JSON
                 data = json.loads(content)
                 # Add document type
-                data['type'] = 'invoice'
-                return data
+                return {"type": "invoice", "data": data}
             except Exception as e:
                 print(f"Error parsing invoice result: {e}")
                 return {"error": f"Failed to parse invoice result: {str(e)}", "type": "invoice"}
@@ -267,7 +266,6 @@ class InvoiceProcessor:
         
         # Initialize combined result structure
         combined_result = {
-            "type": "multipage_invoice",
             "page_count": page_count,
             "vendor_name": "",
             "vendor_address": "",
@@ -593,7 +591,7 @@ class InvoiceProcessor:
                 else:
                     print(f"API request failed for totals: {totals_response.status_code}")
                     
-        return combined_result
+        return {"type": "multipage_invoice","data":combined_result}
 
     def process_pdf(self, pdf_path, output_path=None, send_to_api=True):
         """Process PDF and extract information"""

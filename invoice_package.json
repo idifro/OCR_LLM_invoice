@@ -1,11 +1,45 @@
 [
   {
-    "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
-    "vendor_address": "7FL-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.",
-    "delivery_address": "Bonfiglioli Transmissions Private Limited, Plot No. E-5/2, MIDC Talegaon - Phase II, Village–Badhawali Taluka - Mawal, Pune, Maharashtra - 410507",
-    "invoice_no": "BTPL-240219",
-    "date": "2024/2/23",
-    "type": "invoice"
+    "type": "invoice",
+    "data": {
+      "vendor_name": "RUSS TIGER ENTERPRISE CO., LTD.",
+      "address": "7FL.-3, NO.218, SEC.1, WEN HSIN RD., NAN TUN DIST., TAICHUNG CITY, TAIWAN, R.O.C.",
+      "invoice_no": "BTPL-240219",
+      "invoice_name": "TRANSMISSION PARTS",
+      "date": "2024/2/23",
+      "items": [
+        {
+          "order": "4172720",
+          "description": "193120001 SHAFT+OR",
+          "quantity": 160,
+          "unit_price": "US$6.00",
+          "amount": "US$960.00"
+        },
+        {
+          "order": "4163025",
+          "description": "610100758 SOLID INPUT SHAFT",
+          "quantity": 12,
+          "unit_price": "US$7.16",
+          "amount": "US$85.92"
+        },
+        {
+          "order": "4170144",
+          "description": "610100758 SOLID INPUT SHAFT",
+          "quantity": 36,
+          "unit_price": "US$7.16",
+          "amount": "US$257.76"
+        },
+        {
+          "order": "4172720",
+          "description": "610100758 SOLID INPUT SHAFT",
+          "quantity": 12,
+          "unit_price": "US$7.16",
+          "amount": "US$85.92"
+        }
+      ],
+      "total_quantity": 220,
+      "total_amount": "US$1,389.60"
+    }
   },
   {
     "type": "packing_list",
@@ -17,15 +51,15 @@
       "items": [
         {
           "item_no": "4172720",
-          "description": "193120001 SHAFT+OR (40*4ctn)",
-          "quantity": "160 pcs",
+          "description": "SHAFT+OR",
+          "quantity": "160 pcs (40*4ctn)",
           "net_weight": "68 kgs",
           "gross_weight": "139 kgs",
           "measurement": "0.23"
         },
         {
           "item_no": "4163025",
-          "description": "610100758 SOLID INPUT",
+          "description": "SOLID INPUT",
           "quantity": "12 pcs",
           "net_weight": "12 kgs",
           "gross_weight": "",
@@ -33,7 +67,7 @@
         },
         {
           "item_no": "4170144",
-          "description": "610100758 SOLID INPUT",
+          "description": "SOLID INPUT",
           "quantity": "36 pcs",
           "net_weight": "32 kgs",
           "gross_weight": "",
@@ -41,7 +75,7 @@
         },
         {
           "item_no": "4172720",
-          "description": "610100758 SOLID INPUT (12*5ctn)",
+          "description": "SOLID INPUT (12*5ctn)",
           "quantity": "12 pcs",
           "net_weight": "12 kgs",
           "gross_weight": "",
